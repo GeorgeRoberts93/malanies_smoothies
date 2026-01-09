@@ -14,7 +14,7 @@ title = st.text_input('Customer Name', ' ')
 st.write('The current customer name is', title)
 
 cnx = st.connection("snowflake")
-session = get_active_session()
+session = cnx.session()
 
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('Fruit_name')) # brings back the list of fruit not the whole table 
 
