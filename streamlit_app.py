@@ -54,7 +54,7 @@ st.text(smoothiefroot_response)
 time_to_insert = st.button('Submit Order')
     # second if block is dependant on the submit button being clicked rather than the fruit being clicked 
     
-    if time_to_insert:
+if time_to_insert:
         session.sql(my_insert_stmt).collect()
 
         # this allows once the ordered is sumbited it says the fstring 
