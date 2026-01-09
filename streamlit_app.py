@@ -22,8 +22,8 @@ my_dataframe = session.table("smoothies.public.fruit_options").select(col('Fruit
 
 # convert the snowpark dataframe to a pandas dataframe so we can use the LOC function 
 pd_df=my_data_frame.to_pandas()
-st.dataframe(pd_df)
-st.stop()
+#st.dataframe(pd_df)
+#st.stop()
 
 # Multiselect 
 
@@ -43,6 +43,10 @@ if ingredients_list:
     # add the for block = for each fruit_chosen in ingredients_list multislect box: do everything below this line that is inented 
     for fruit_chosen in ingredients_list:
         ingredients_string += fruit_chosen + ' '  #+= means add this to what is already in the variable. so each time the for loop is repeated a new fruit name is added
+
+        search_on=pd_df.loc[pd_df['fruit_name'] == fruit_chosen, 'search_on'].iloc[0]
+        st.write('The search value for ', fruit_chosen,' is ', search_on, ',')
+        
         st.subheader(fruit_chosen + ' Nutrition Information')
         smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit_chosen)
         sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
