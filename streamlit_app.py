@@ -17,7 +17,12 @@ cnx = st.connection("snowflake")
 session = cnx.session()
 
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('Fruit_name'),col('search_on')) # brings back the list of fruit not the whole table 
-st.dataframe(data=my_dataframe, use_container_width=True) #dont need the data frame to display 
+#st.dataframe(data=my_dataframe, use_container_width=True) #dont need the data frame to display 
+#st.stop()
+
+# convert the snowpark dataframe to a pandas dataframe so we can use the LOC function 
+pd_df=my_data_frame.to_pandas()
+st.dataframe(pd_df)
 st.stop()
 
 # Multiselect 
