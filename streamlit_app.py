@@ -51,7 +51,7 @@ st.text(smoothiefroot_response)
 
     
 #add a submit order button
-    time_to_insert = st.button('Submit Order')
+time_to_insert = st.button('Submit Order')
     # second if block is dependant on the submit button being clicked rather than the fruit being clicked 
     
     if time_to_insert:
