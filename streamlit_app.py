@@ -1,8 +1,6 @@
 # Import python packages
 import streamlit as st
 
-from snowflake.snowpark.context import get_active_session
-
 from snowflake.snowpark.functions import col, when_matched # import the snowpark column function
 
 
@@ -15,6 +13,7 @@ title = st.text_input('Customer Name', ' ')
 
 st.write('The current customer name is', title)
 
+cnx = st.connection("snowflake")
 session = get_active_session()
 
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('Fruit_name')) # brings back the list of fruit not the whole table 
