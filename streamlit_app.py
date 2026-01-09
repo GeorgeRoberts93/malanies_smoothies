@@ -1,6 +1,8 @@
 # Import python packages
 import streamlit as st
 from snowflake.snowpark.functions import col, when_matched # import the snowpark column function
+# New section to display smoothiefroot nutrition information 
+import requests 
 
 # Write directly to the app
 st.title(":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
@@ -35,7 +37,9 @@ if ingredients_list:
     # add the for block = for each fruit_chosen in ingredients_list multislect box: do everything below this line that is inented 
     for fruit_chosen in ingredients_list:
         ingredients_string += fruit_chosen + ' '  #+= means add this to what is already in the variable. so each time the for loop is repeated a new fruit name is added
-
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+        sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
+        
     #st.write(ingredients_string) #output the string need to be part of the if block not the for
 
 # This takes the name and fruit selection (the variable for name is title)
@@ -44,11 +48,7 @@ if ingredients_list:
 
     #st.write(my_insert_stmt)
     #st.stop()
-# New section to display smoothiefroot nutrition information 
-import requests 
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-# st.text(smoothiefroot_response.json())
-sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
+
     
 #add a submit order button
 time_to_insert = st.button('Submit Order')
